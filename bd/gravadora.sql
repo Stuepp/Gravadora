@@ -9,17 +9,6 @@ create table instrumento(
 	nome varchar(50) not null
 );
 
-create table disco(
-	id_disco int primary key,
-	titulo varchar(75),
-	formato varchar(75),
-	data date,
-	fk_musico int,
-	fk_banda int,
-	foreign key(fk_musico) references musico,
-	foreign key(fk_banda) references banda
-);
-
 create table produtor(
 	id_produtor int primary key
 	nome varchar(50) not null,
@@ -34,6 +23,17 @@ create table musica(
 create table banda(
 	id_banda int primary key
 	nome varchar(75) not null
+);
+
+create table disco(
+	id_disco int primary key,
+	titulo varchar(75),
+	formato varchar(75),
+	data date,
+	fk_musico int,
+	fk_banda int,
+	foreign key(fk_musico) references musico,
+	foreign key(fk_banda) references banda
 );
 
 create table own(
