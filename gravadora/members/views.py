@@ -5,10 +5,12 @@ from .models import Musico, Own, Musica
 # Create your views here.
 def members(request):
     musicos = Musico.objects.all().values() #otimizar na entrega final
+    musico = Musico.objects.get(id=1)
     musicas = Musica.objects.all().values()
     context = {
         'musicos': musicos,
-        'musicas':musicas
+        'musicas':musicas,
+        'musico': musico
     }
     template = loader.get_template('index.htm')
     return HttpResponse(template.render(context, request))

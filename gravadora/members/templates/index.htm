@@ -61,9 +61,7 @@
             <div class="grid-item-1">
                 <input type="text" placeholder=" Search..."> <!--adcionar autocomplete e pegar lista de elementos cadastrados no bd, tentar adicionar icone de search tb-->
                 <!--<h1>Nome do artista/banda</h1>  eliminar gambiarra algum dia-->
-                {% for x in musicos %}
-                <h1>{{x.nome}}</h1>
-                {% endfor%}
+                <h1>{{musico.nome}}</h1>
                 <hr>
                 <h3>Músicas do Mesmo artista/banda</h3>
                 {% for x in musicas %}
@@ -78,13 +76,19 @@
                     <img src="{{image_path}}" alt="sample" style="width: 200px; height: 200px; 
                     border: solid 3px black;"><br>
                     <p>{{x.image}}</p>
-                    <p>{{x.audio.path}}</p>
+                    <p>{{x.file}}</p>
                     {% endfor %}
                     <h1>Nome do Album</h1>
                     <audio controls>
                         <source src="{% static '/Tim_Maia-Do_Leme_ao_Pontal.mp3'%}" type="audio/ogg">
                         <source src="{% static '/Tim_Maia-Do_Leme_ao_Pontal.mp3'%}" type="audio/mpeg">
                         <source src="{% static '/Tim_Maia-Do_Leme_ao_Pontal.mp3'%}" type="audio/mp3">
+                        Your browser does not support the audio element.
+                    </audio>
+                    <audio controls>
+                        <source src="{x.file}" type="audio/ogg">
+                        <source src="{x.file}" type="audio/mpeg">
+                        <source src="{x.file}" type="audio/mp3">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
