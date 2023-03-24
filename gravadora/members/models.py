@@ -2,8 +2,9 @@ from django.db import models
 
 # Create your models here.
 class Musico(models.Model):
-	endereço = models.CharField(max_length=200)
+	endereco = models.CharField(max_length=200)
 	telefone = models.CharField(max_length=25)
+	nome = models.CharField(max_length=50)
 	
 class Instrumento(models.Model):
 	nome = models.CharField(max_length=50)
@@ -14,6 +15,8 @@ class Produtor(models.Model):
 class Musica(models.Model):
 	titulo = models.CharField(max_length=50)
 	autores = models.CharField(max_length=150)
+	file = models.FileField(upload_to='songs/') # see better
+	image = models.FileField(upload_to='images/') # see better
 
 class Banda(models.Model):
 	nome = models.CharField(max_length=75)
@@ -21,7 +24,8 @@ class Banda(models.Model):
 class Disco(models.Model):
 	titulo = models.CharField(max_length=75)
 	formato = models.CharField(max_length=75)
-	data = models.DateField()
+	data = models.DateField() # see better
+	image = models.FileField(upload_to='images/') # see better
 	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE)
 	fk_banda = models.ForeignKey(Banda, on_delete=models.CASCADE)
 
