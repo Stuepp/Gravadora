@@ -1,19 +1,29 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
+from django.views.generic import ListView
+from django.views import View
 from .models import Musico, Own, Musica
 # Create your views here.
-def members(request):
-    musicos = Musico.objects.all().values() #otimizar na entrega final
-    musico = Musico.objects.get(id=1)
-    musicas = Musica.objects.all().values()
+
+class ShowPlayListView(View):
+    """
+    template_name = 'index.htm'    
     context = {
-        'musicos': musicos,
-        'musicas':musicas,
-        'musico': musico
+        'musico_atual': Musico.objects.get(id=1),
+        'musica_atual' : Musica.objects.get(id=4),
+        'musicas' : Musica.objects.all().values() # selecionar futuramente apenas musicas da playlist
     }
-    template = loader.get_template('index.htm')
-    return HttpResponse(template.render(context, request))
+    """
+    def get(self, request, *args, **kwargs):
+        template = loader.get_template('index.htm')
+        context = {
+            'musico': Musico.objects.get(id=1),
+            'musica' : Musica.objects.get(id=4),
+            'musicas' : Musica.objects.all().values() # selecionar futuramente apenas musicas da playlist
+        }
+        return HttpResponse(template.render(context, request))
+
 
 def Musica_save(request): # está funcionando! testar agora imagem e audio
     if request.method == 'POST':

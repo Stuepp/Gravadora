@@ -60,35 +60,23 @@
         <div class="grid-container">
             <div class="grid-item-1">
                 <input type="text" placeholder=" Search..."> <!--adcionar autocomplete e pegar lista de elementos cadastrados no bd, tentar adicionar icone de search tb-->
-                <!--<h1>Nome do artista/banda</h1>  eliminar gambiarra algum dia-->
+                <!--nome do album-->
                 <h1>{{musico.nome}}</h1>
                 <hr>
-                <h3>Músicas do Mesmo artista/banda</h3>
+                <h3>Músicas seguintes</h3> <!--não mostrar a música atual-->
                 {% for x in musicas %}
-                <h3>{{x.titulo}}</h3>
+                <h3>{{x.titulo}} - {{musico.nome}}</h3> <!--musica - autor -->
                 {% endfor %}
             </div>
             <div class="grid-item-2" style="display: grid; grid-auto-flow: row; align-content: center;">
                 <div class="disco_atual">
-                    <img src="{% static '/sample.jpg' %}" alt="sample" style="width: 200px; height: 200px; 
+                    <img src="{{musica.image.url}}" alt="sample" style="width: 200px; height: 200px; 
                     border: solid 3px black;">
-                    {% for x in musicas %}
-                    <img src="{{image_path}}" alt="sample" style="width: 200px; height: 200px; 
-                    border: solid 3px black;"><br>
-                    <p>{{x.image}}</p>
-                    <p>{{x.file}}</p>
-                    {% endfor %}
-                    <h1>Nome do Album</h1>
+                    <h1>{{musica.titulo}}</h1> <!--nome da música atual-->
                     <audio controls>
-                        <source src="{% static '/Tim_Maia-Do_Leme_ao_Pontal.mp3'%}" type="audio/ogg">
-                        <source src="{% static '/Tim_Maia-Do_Leme_ao_Pontal.mp3'%}" type="audio/mpeg">
-                        <source src="{% static '/Tim_Maia-Do_Leme_ao_Pontal.mp3'%}" type="audio/mp3">
-                        Your browser does not support the audio element.
-                    </audio>
-                    <audio controls>
-                        <source src="{x.file}" type="audio/ogg">
-                        <source src="{x.file}" type="audio/mpeg">
-                        <source src="{x.file}" type="audio/mp3">
+                        <source src="{{musica.file.url}}" type="audio/ogg">
+                        <source src="{{musica.file.url}}" type="audio/mpeg">
+                        <source src="{{musica.file.url}}" type="audio/mp3">
                         Your browser does not support the audio element.
                     </audio>
                 </div>

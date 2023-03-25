@@ -30,8 +30,8 @@ class Disco(models.Model):
 	fk_banda = models.ForeignKey(Banda, on_delete=models.CASCADE)
 
 class Own(models.Model):
-	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE)
-	fk_banda = models.ForeignKey(Banda, on_delete=models.CASCADE)
+	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE) # make opttional
+	fk_banda = models.ForeignKey(Banda, on_delete=models.CASCADE) # make optional
 
 class Toca(models.Model):
 	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE)
