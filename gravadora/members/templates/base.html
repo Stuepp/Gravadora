@@ -1,9 +1,22 @@
 <!DOCTYPE html>
 <html>
+    <head>
+        <style>
+            .content-container{
+                display: grid;
+                grid-template-columns: auto;
+            }
+            .row{
+                margin-left: 550px;
+                margin-right: 550px;
+                min-width: 400px;
+            }
+        </style>
+    </head>
     <body>
         <div class="page-header">
         </div>
-        <div class="content container">
+        <div class="content-container">
             <div class="row">
                 <div class="col-md-8">
                 {% block content %}
