@@ -11,7 +11,7 @@ class ShowPlayListView(View):
     template_name = 'index.htm'
     context = {
         'musico': Musico.objects.get(id=1),
-        'musica' : Musica.objects.get(id=5),
+        'musica' : Musica.objects.get(id=4),
         'musicas' : Musica.objects.all().values() # selecionar futuramente apenas musicas da playlist/disco
     }
     def get(self, request, *args, **kwargs):
