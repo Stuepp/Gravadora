@@ -26,12 +26,12 @@ class Disco(models.Model):
 	formato = models.CharField(max_length=75)
 	data = models.DateField() # see better
 	image = models.FileField(upload_to='images/') # see better
-	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE)
-	fk_banda = models.ForeignKey(Banda, on_delete=models.CASCADE)
+	fk_musico = models.ForeignKey(Musico, blank=True, null=True, on_delete=models.CASCADE)
+	fk_banda = models.ForeignKey(Banda, blank=True, null=True, on_delete=models.CASCADE)
 
 class Own(models.Model):
-	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE) # make opttional
-	fk_banda = models.ForeignKey(Banda, on_delete=models.CASCADE) # make optional
+	fk_musico = models.ForeignKey(Musico, blank=True, null=True, on_delete=models.CASCADE) # make opttional
+	fk_banda = models.ForeignKey(Banda, blank=True, null=True, on_delete=models.CASCADE) # make optional
 
 class Toca(models.Model):
 	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE)

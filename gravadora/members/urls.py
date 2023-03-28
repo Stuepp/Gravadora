@@ -1,8 +1,9 @@
 from django.urls import path
 from . import views
-from members.views import ShowPlayListView
+from members.views import ShowPlayListView, ShowSaveSong, SaveSongForm
 
 urlpatterns = [
     path('', ShowPlayListView.as_view(),name='index'),
-    path('audio/',views.Musica_save, name='members'),
+    path('audio/',ShowSaveSong.as_view(), name='aud'),
+    path('add/', SaveSongForm.as_view(), name='add'),
 ]

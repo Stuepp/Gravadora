@@ -21,6 +21,11 @@
             <h3>Título:</h3>
             <input name="titulo"><br><br>
             <h3>Autores:</h3>
+            <select name="aut" id="aut">
+                {% for x in musicos %}
+                    <option value="{{x.nome}}">{{x.nome}}</option>
+                {% endfor %}
+              </select>
             <input name="autores"><br><br>
             <label for="audio"><strong>Upload Audio: </strong></label>
             <input type="file" name="audio" accept="audio/*"><br><br>
