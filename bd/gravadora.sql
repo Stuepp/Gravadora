@@ -1,9 +1,16 @@
+-- d
+create table own(
+    id int primary key,
+    fk_musico int,
+    fk_banda int,
+);
 --entities
 create table musico(
     id int primary key, -- fk de own
     name varchar(50),
     phone varchar(20),
-    address varchar(150)
+    address varchar(150),
+    foreign key(id) references own
 );
 create table instrumento(
     id int primary key,
@@ -11,7 +18,8 @@ create table instrumento(
 );
 create table banda(
     id int primary key, -- e fk de own
-    name varchar(50)
+    name varchar(50),
+    foreign key(id) references own
 );
 create table produtor(
     id int primary key,
@@ -35,14 +43,6 @@ create table musica(
     autores varchar(800),
     song_file varchar(200),
     img_file varchar(200)
-);
--- d
-create table own(
-    id int primary key,
-    fk_musico int,
-    fk_banda int,
-    foreign key(fk_musico) references musico, -- tirar
-    foreign key(fk_banda) references banda -- tirar
 );
 -- relations
 create table participa( -- bandas/artistas que participaram na música
