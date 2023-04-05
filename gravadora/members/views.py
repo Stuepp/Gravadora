@@ -3,15 +3,16 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views import View
 from django.views.generic.edit import FormView
-from .forms import AddForm
+from .forms import AddMusicaForm, AddMusicoForm, AddBandaForm, AddInstrumentoForm, AddDiscoForm, addProdutorForm
 from .models import Musico, Own, Musica, Participa
 # Create your views here.
 
 class ShowPlayListView(View):
     template_name = 'index.htm'
+    #if Musico.objects.all()
     context = {
-        'musico': Musico.objects.get(id=1),
-        'musica' : Musica.objects.get(id=4),
+        'musico': Musico.objects.all().values(), #get(id=1),
+        'musica' : Musica.objects.all().values(), #get(id=4),
         'musicas' : Musica.objects.all().values() # selecionar futuramente apenas musicas da playlist/disco
     }
     def get(self, request, *args, **kwargs):
@@ -20,13 +21,59 @@ class ShowPlayListView(View):
 
 class SaveSongForm(FormView): # alterar para conseguir fazer upload já com a ligação entre musica participa e own
     template_name = 'add.htm'
-    form_class = AddForm
+    form_class = AddMusicaForm
     success_url = '/success/'
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
 
+class SaveMusicoForm(FormView):
+    template_name = 'add.htm'
+    form_class = AddMusicoForm
+    success_url = '/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+class SaveBandaForm(FormView):
+    template_name = 'add.htm'
+    form_class = AddBandaForm
+    success_url = '/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+class SaveInstrumentoForm(FormView):
+    template_name = 'add.htm'
+    form_class = AddInstrumentoForm
+    success_url = '/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+class SaveDiscoForm(FormView):
+    template_name = 'add.htm'
+    form_class = AddDiscoForm
+    success_url = '/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+class SaveProdutorForm(FormView):
+    template_name = 'add.htm'
+    form_class = addProdutorForm
+    success_url = '/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+    
+"""
 class ShowSaveSong(View):
     template_name = 'aud.htm'
     musicos = Musico.objects.all().values()
@@ -76,3 +123,4 @@ class ShowSaveSong(View):
             return HttpResponse(template.render(context, request))
             #return render(request, self.template_name, {'audio_path':audio_path, 'musicos':Musico.objects.all().values()})
         #return render(request, 'aud.htm')
+"""

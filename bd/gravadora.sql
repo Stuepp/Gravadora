@@ -1,8 +1,6 @@
 -- d
 create table own(
     id int primary key,
-    fk_musico int,
-    fk_banda int,
 );
 --entities
 create table musico(

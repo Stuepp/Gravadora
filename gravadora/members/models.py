@@ -1,7 +1,13 @@
 from django.db import models
 
 # Create your models here.
+class Own(models.Model):
+	id = models.BigAutoField(primary_key=True)
+	# fk_musico = models.ForeignKey(Musico, blank=True, null=True, on_delete=models.CASCADE)
+	# fk_banda = models.ForeignKey(Banda, blank=True, null=True, on_delete=models.CASCADE)
+
 class Musico(models.Model):
+	id = models.OneToOneField(Own, primary_key=True, on_delete=models.CASCADE)
 	endereco = models.CharField(max_length=200)
 	telefone = models.CharField(max_length=25)
 	nome = models.CharField(max_length=50)
@@ -19,6 +25,7 @@ class Musica(models.Model):
 	image = models.FileField(upload_to='images/') # see better
 
 class Banda(models.Model):
+	id = models.OneToOneField(Own, primary_key=True, on_delete=models.CASCADE)
 	nome = models.CharField(max_length=75)
 
 class Disco(models.Model):
@@ -28,10 +35,6 @@ class Disco(models.Model):
 	image = models.FileField(upload_to='images/') # see better
 	fk_musico = models.ForeignKey(Musico, blank=True, null=True, on_delete=models.CASCADE)
 	fk_banda = models.ForeignKey(Banda, blank=True, null=True, on_delete=models.CASCADE)
-
-class Own(models.Model):
-	fk_musico = models.ForeignKey(Musico, blank=True, null=True, on_delete=models.CASCADE) # make opttional
-	fk_banda = models.ForeignKey(Banda, blank=True, null=True, on_delete=models.CASCADE) # make optional
 
 class Toca(models.Model):
 	fk_musico = models.ForeignKey(Musico, on_delete=models.CASCADE)
