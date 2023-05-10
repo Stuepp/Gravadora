@@ -32,7 +32,6 @@ class Disco(models.Model):
 	titulo = models.CharField(max_length=75)
 	formato = models.CharField(max_length=75)
 	data = models.DateField() # see better
-	image = models.FileField(upload_to='images/') # see better
 	fk_musico = models.ForeignKey(Musico, blank=True, null=True, on_delete=models.CASCADE)
 	fk_banda = models.ForeignKey(Banda, blank=True, null=True, on_delete=models.CASCADE)
 

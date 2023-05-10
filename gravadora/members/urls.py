@@ -4,7 +4,7 @@ from members.views import ShowPlayListView, SaveSongForm, SaveMusicoForm, SaveBa
 
 urlpatterns = [
     path('', ShowPlayListView.as_view(),name='index'),
-    path('add/', SaveSongForm.as_view(), name='add'),
+    path('addMusica/', SaveSongForm.as_view(), name='add'),
     path('addMusico/', SaveMusicoForm.as_view(), name='add'),
     path('addBanda/', SaveBandaForm.as_view(), name='add'),
     path('addInstrumento/', SaveInstrumentoForm.as_view(), name='add'),

@@ -37,6 +37,11 @@ class SaveMusicoForm(FormView):
         form.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(SaveMusicoForm, self).get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Músico'
+        return context
+
 class SaveBandaForm(FormView):
     template_name = 'add.htm'
     form_class = AddBandaForm
@@ -45,6 +50,11 @@ class SaveBandaForm(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(SaveBandaForm, self).get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Banda'
+        return context
 
 class SaveInstrumentoForm(FormView):
     template_name = 'add.htm'
@@ -55,6 +65,11 @@ class SaveInstrumentoForm(FormView):
         form.save()
         return super().form_valid(form)
 
+    def get_context_data(self, **kwargs):
+        context = super(SaveInstrumentoForm, self).get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Instrumento'
+        return context
+
 class SaveDiscoForm(FormView):
     template_name = 'add.htm'
     form_class = AddDiscoForm
@@ -63,6 +78,11 @@ class SaveDiscoForm(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super(SaveDiscoForm, self).get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Disco'
+        return context
 
 class SaveProdutorForm(FormView):
     template_name = 'add.htm'
@@ -72,6 +92,11 @@ class SaveProdutorForm(FormView):
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
+    
+    def get_context_data(self, **kwargs):
+        context = super(SaveProdutorForm, self).get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Produtor'
+        return context
     
 """
 class ShowSaveSong(View):

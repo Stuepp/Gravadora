@@ -7,30 +7,31 @@ class AddMusicaForm(forms.ModelForm):
         fields = ('titulo','autores','file','image')
 
         widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
-            'autores': forms.TextInput(attrs={'class': 'form-control'}),
-            'file': forms.FileInput(attrs={'type': 'file'}),
-            'image': forms.FileInput(attrs={'type': 'file'}),
+            'titulo': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            #'autores': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'autores': forms.CheckboxSelectMultiple(attrs={'class': 'form-control'}),
+            'file': forms.FileInput(attrs={'type': 'file', 'required': True}),
+            'image': forms.FileInput(attrs={'type': 'file', 'required': True}),
         }
 
 class AddMusicoForm(forms.ModelForm): # preciso fazer um sistema que insere um id automatico?
-    class Meta:
+    class Meta: # lembrando que Musico é filho de Own
         model = Musico
         fields = ('endereco','telefone','nome')
 
-        widgets = {
-            'endereco': forms.TextInput(attrs={'class': 'form-control'}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control'}),
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+        widgets = { # musico tem os instrumentos que ele toca
+            'endereco': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'telefone': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
         }
 
 class AddBandaForm(forms.ModelForm): # preciso fazer um sistema que insere um id automatico?
-    class Meta:
+    class Meta: # lembrando que Banda é filha de Own
         model = Banda
         fields = ('nome',)
 
-        widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+        widgets = { # a banda tem os musicos que estão nela
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
         }
 
 class AddInstrumentoForm(forms.ModelForm):
@@ -39,19 +40,18 @@ class AddInstrumentoForm(forms.ModelForm):
         fields = ('nome',)
 
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
         }
 
 class AddDiscoForm(forms.ModelForm):
     class Meta:
         model = Disco
-        fields = ('titulo','formato','data','image','fk_musico','fk_banda')
+        fields = ('titulo','formato','data','fk_musico','fk_banda')
 
-        widgets = {
-            'titulo': forms.TextInput(attrs={'class': 'form-control'}),
-            'formato': forms.TextInput(attrs={'class': 'form-control'}),
-            'data': forms.FileInput(attrs={'type': 'data'}), # tyoe data?
-            'image': forms.FileInput(attrs={'type': 'file'}),
+        widgets = { # pelo menos o musico ou a banda tem que ser escolhido
+            'titulo': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'formato': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'data': forms.DateTimeInput(attrs={'type': 'date', 'required': True}), # tyoe data?
             'musico': forms.TextInput(attrs={'class': 'form-control'}), # alterar para autocomplete ou select box?
             'banda': forms.TextInput(attrs={'class': 'form-control'}), # alterar para autocomplete ou select box?
         }
@@ -62,5 +62,5 @@ class addProdutorForm(forms.ModelForm):
         fields = ('nome',)
 
         widgets = {
-            'nome': forms.TextInput(attrs={'class': 'form-control'}),
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
         }
