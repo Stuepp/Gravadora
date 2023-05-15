@@ -1,20 +1,24 @@
 from django import forms
-from .models import Musica, Musico, Banda, Own, Participa, Instrumento, Disco, Produtor
+from .models import Musica, Musico, Banda, Own, Instrumento, Disco, Produtor
 
 class AddMusicaForm(forms.ModelForm):
     class Meta:
         model = Musica
-        fields = ('titulo','autores','file','image')
+        fields = ('titulo','autores', 'participa') #,'file','image')
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-            #'autores': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-            'autores': forms.CheckboxSelectMultiple(attrs={'class': 'form-control'}),
-            'file': forms.FileInput(attrs={'type': 'file', 'required': True}),
-            'image': forms.FileInput(attrs={'type': 'file', 'required': True}),
+            'autores': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            #'autores': forms.CheckboxSelectMultiple(attrs={'class': 'form-control'}),
+            #'file': forms.FileInput(attrs={'type': 'file', 'required': False}),
+            #'image': forms.FileInput(attrs={'type': 'file', 'required': False}),
         }
+        participa = forms.ModelChoiceField(
+            queryset=Own.objects.all(),
+            widget=forms.CheckboxInput
+        )
 
-class AddMusicoForm(forms.ModelForm): # preciso fazer um sistema que insere um id automatico?
+class AddMusicoForm(forms.ModelForm):
     class Meta: # lembrando que Musico é filho de Own
         model = Musico
         fields = ('endereco','telefone','nome')
@@ -25,7 +29,7 @@ class AddMusicoForm(forms.ModelForm): # preciso fazer um sistema que insere um i
             'nome': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
         }
 
-class AddBandaForm(forms.ModelForm): # preciso fazer um sistema que insere um id automatico?
+class AddBandaForm(forms.ModelForm):
     class Meta: # lembrando que Banda é filha de Own
         model = Banda
         fields = ('nome',)

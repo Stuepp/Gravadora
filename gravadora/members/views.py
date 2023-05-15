@@ -4,7 +4,7 @@ from django.template import loader
 from django.views import View
 from django.views.generic.edit import FormView
 from .forms import AddMusicaForm, AddMusicoForm, AddBandaForm, AddInstrumentoForm, AddDiscoForm, addProdutorForm
-from .models import Musico, Own, Musica, Participa
+from .models import Musico, Own, Musica
 # Create your views here.
 
 class ShowPlayListView(View):
@@ -97,7 +97,20 @@ class SaveProdutorForm(FormView):
         context = super(SaveProdutorForm, self).get_context_data(**kwargs)
         context['pagetitle'] = 'Cadastro de Produtor'
         return context
+
+class SaveMusicaForm(FormView): # multiple select box is not showing as expected
+    template_name = 'add.htm'
+    form_class = AddMusicaForm
+    success_url = '/success/'
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
     
+    def get_context_data(self, **kwargs): # it's not showing title for some reason
+        context = super(SaveMusicaForm, self).get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Musica'
+        return context
 """
 class ShowSaveSong(View):
     template_name = 'aud.htm'

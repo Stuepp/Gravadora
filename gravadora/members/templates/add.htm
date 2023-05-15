@@ -4,8 +4,12 @@
     <h1 class=display-4">{{pagetitle}}</h1> <!--change the 'song' part to whatever is being uploaded, Musico/Banda/Song/Instrumento...-->
     <form method="post" enctype="multipart/form-data">
          {% csrf_token %}
-         {{ form.as_p }}
+         {{ form.as_div }}
          <input type="submit">
     </form>
+    <select name="" id="">
+        <option value="">adas</option>
+        <option value="">adas</option>
+    </select>
 </div>
 {% endblock %}
