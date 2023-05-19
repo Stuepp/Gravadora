@@ -61,11 +61,11 @@
             <div class="grid-item-1">
                 <input type="text" placeholder=" Search..."> <!--adcionar autocomplete e pegar lista de elementos cadastrados no bd, tentar adicionar icone de search tb-->
                 <!--nome do album-->
-                <h1>{{musico.nome}}</h1>
+                <h1>{{disco.titulo}}</h1>
                 <hr>
                 <h3>Músicas seguintes</h3> <!--não mostrar a música atual-->
                 {% for x in musicas %}
-                <h3>{{x.titulo}} - {{musico.nome}}</h3> <!--musica - autor -->
+                <h3>{{x.titulo}} -{% for musico in x.participa_Musico.all %} {{musico.nome}} {% endfor %}</h3> <!--musica - autor -->
                 {% endfor %}
             </div>
             <div class="grid-item-2" style="display: grid; grid-auto-flow: row; align-content: center;">
