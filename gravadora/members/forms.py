@@ -5,9 +5,11 @@ from .models import Musica, Musico, Banda, Instrumento, Disco, Produtor
 class CustomMusicaMusicoChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, musico):
         return "%s" % musico.nome
+    
 class CustomMusicaBandaChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, banda):
         return "%s" % banda.nome
+    
 class CustomMusicaDiscoChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, disco):
         return "%s" % disco.titulo
