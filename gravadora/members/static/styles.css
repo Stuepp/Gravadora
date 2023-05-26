@@ -1,0 +1,27 @@
+/* ... */
+
+.disco-container {
+    background-image: linear-gradient(180deg, aqua, blue, #00008B);
+    background-image: linear-gradient(180deg, #F78D35, orange , #CC5500);
+    height: 100%;
+    margin: 0;
+    color: white;
+    font-family: Arial, sans-serif;
+    padding: 30px;
+    border-radius: 10px;
+}
+
+html {
+    height: 100%;
+}
+
+body {
+    background-image: linear-gradient(180deg, aqua, blue, #00008B);
+    background-image: linear-gradient(180deg, #F78D35, orange , #CC5500);
+    height: 100%;
+    margin: 0;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    font-family: Arial, sans-serif;
+}

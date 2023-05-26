@@ -23,7 +23,7 @@ class ShowPlayListView(View):
         return HttpResponse(template.render(self.context, request))
 
 class SaveMusicoForm(FormView):
-    template_name = 'add.htm'
+    template_name = 'addMusico.htm'
     form_class = AddMusicoForm
     success_url = '/success/'
 

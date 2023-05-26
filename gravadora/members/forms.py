@@ -42,21 +42,19 @@ class AddMusicaForm(forms.ModelForm): # tentar reduzir MusicaMusico e MusicaBand
 class AddMusicoForm(forms.ModelForm):
     class Meta:
         model = Musico
-        fields = ('endereco','telefone','nome', 'esta','toca')
+        fields = ('endereco', 'telefone', 'nome', 'esta', 'toca')
 
-        widgets = {
-            'endereco': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-            'telefone': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-            'nome': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-        }
-    esta = forms.ModelMultipleChoiceField(
+    endereco = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control form-control-lg', 'required': True}))
+    telefone = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control form-control-lg', 'required': True}))
+    nome = forms.CharField(widget=forms.TextInput(attrs={'class': 'form-control form-control-lg', 'required': True}))
+    esta = forms.ModelChoiceField(
         queryset=Banda.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.Select(attrs={'class': 'form-control form-control-lg'}),
         required=False
     )
-    toca = forms.ModelMultipleChoiceField(
+    toca = forms.ModelChoiceField(
         queryset=Instrumento.objects.all(),
-        widget=forms.CheckboxSelectMultiple,
+        widget=forms.Select(attrs={'class': 'form-control form-control-lg'}),
         required=False
     )
 

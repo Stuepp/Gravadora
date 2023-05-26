@@ -1,41 +1,46 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            .content-container{
-                display: grid;
-                grid-template-columns: auto;
-            }
-            .row{
-                margin-left: 550px;
-                margin-right: 550px;
-                min-width: 400px;
-            }
-            .form-control{
-                display: grid;
-                margin: 10px;
-            }
-            fieldset{
-                margin: 10px;
-                margin-left: -13px;
-                border: none;
-            }
-            fieldset label{
-                margin: 5px;
-                margin-left: 15px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="page-header">
-        </div>
-        <div class="content-container">
-            <div class="row">
-                <div class="col-md-8">
-                {% block content %}
-                {% endblock %}
-                </div>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .content-container {
+            display: grid;
+            grid-template-columns: auto;
+        }
+        
+        .row {
+            margin-left: auto;
+            margin-right: auto;
+            max-width: 800px;
+        }
+        
+        .form-control {
+            display: grid;
+            margin: 10px;
+        }
+        
+        fieldset {
+            margin: 10px;
+            margin-left: -13px;
+            border: none;
+        }
+        
+        fieldset label {
+            margin: 5px;
+            margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-header">
+    </div>
+    <div class="content-container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

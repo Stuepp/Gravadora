@@ -95,21 +95,21 @@
     <div class="grid-container">
         <div class="grid-item-1">
             <input type="text" placeholder="Search...">
-            <h1>{{disco.titulo}}</h1>
+            <h1 style="white-space: nowrap;">{{ disco.titulo }}</h1>
             <hr>
             <h3>Músicas seguintes</h3>
-            {% for x in musicas %}
-            <h3>{{x.titulo}} -{% for musico in x.participa_Musico.all %} {{musico.nome}} {% endfor %}</h3>
+            {% for musica in musicas %}
+                <h3>{{ musica.titulo }} -{% for musico in musica.participa_Musico.all %} {{ musico.nome }} {% endfor %}</h3>
             {% endfor %}
         </div>
         <div class="grid-item-2">
             <div class="disco_atual">
-                <img src="{{musica.image.url}}" alt="sample" style="width: 200px; height: 200px; border: solid 3px black;">
-                <h1>{{musica.titulo}}</h1>
+                <img src="{{ musica.image.url }}" alt="sample" style="width: 200px; height: 200px; border: solid 3px black;">
+                <h1>{{ musica.titulo }}</h1>
                 <audio controls>
-                    <source src="{{musica.file.url}}" type="audio/ogg">
-                    <source src="{{musica.file.url}}" type="audio/mpeg">
-                    <source src="{{musica.file.url}}" type="audio/mp3">
+                    <source src="{{ musica.file.url }}" type="audio/ogg">
+                    <source src="{{ musica.file.url }}" type="audio/mpeg">
+                    <source src="{{ musica.file.url }}" type="audio/mp3">
                     Your browser does not support the audio element.
                 </audio>
             </div>
@@ -129,7 +129,6 @@
         </div>
     </div>
     <div class="footer">
-
     </div>
 </body>
 </html>
