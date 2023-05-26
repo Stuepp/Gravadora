@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 container disco-container">
+        <div class="text-center">
+            <h1 class="display-4">{{ pagetitle }}</h1>
+            <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.titulo.id_for_label }}">Título:</label>
+                {{ form.titulo }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.autores.id_for_label }}">Autores:</label>
+                {{ form.autores }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.file.id_for_label }}">Arquivo:</label>
+                {{ form.file }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.image.id_for_label }}">Imagem:</label>
+                {{ form.image }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.participa_Musico.id_for_label }}">Músico:</label>
+                {{ form.participa_Musico }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.participa_Banda.id_for_label }}">Banda:</label>
+                {{ form.participa_Banda }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.aparece.id_for_label }}">Aparece em:</label>
+                {{ form.aparece }}
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

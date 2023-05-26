@@ -37,7 +37,7 @@ class SaveMusicoForm(FormView):
         return context
 
 class SaveBandaForm(FormView):
-    template_name = 'add.htm'
+    template_name = 'addBanda.htm'
     form_class = AddBandaForm
     success_url = '/success/'
 
@@ -46,12 +46,12 @@ class SaveBandaForm(FormView):
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(SaveBandaForm, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['pagetitle'] = 'Cadastro de Banda'
         return context
 
 class SaveInstrumentoForm(FormView):
-    template_name = 'add.htm'
+    template_name = 'addInstrumento.htm'
     form_class = AddInstrumentoForm
     success_url = '/success/'
 
@@ -60,48 +60,48 @@ class SaveInstrumentoForm(FormView):
         return super().form_valid(form)
 
     def get_context_data(self, **kwargs):
-        context = super(SaveInstrumentoForm, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['pagetitle'] = 'Cadastro de Instrumento'
         return context
 
 class SaveDiscoForm(FormView):
-    template_name = 'add.htm'
+    template_name = 'addDisco.htm'
     form_class = AddDiscoForm
     success_url = '/success/'
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
-        context = super(SaveDiscoForm, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['pagetitle'] = 'Cadastro de Disco'
         return context
 
 class SaveProdutorForm(FormView):
-    template_name = 'add.htm'
+    template_name = 'addProdutor.htm'
     form_class = addProdutorForm
     success_url = '/success/'
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-    
+
     def get_context_data(self, **kwargs):
-        context = super(SaveProdutorForm, self).get_context_data(**kwargs)
+        context = super().get_context_data(**kwargs)
         context['pagetitle'] = 'Cadastro de Produtor'
         return context
 
-class SaveMusicaForm(FormView): # multiple select box is not showing as expected
-    template_name = 'add.htm'
+class SaveMusicaForm(FormView):
+    template_name = 'addMusica.htm'
     form_class = AddMusicaForm
     success_url = '/success/'
 
     def form_valid(self, form):
         form.save()
         return super().form_valid(form)
-    
-    def get_context_data(self, **kwargs): # it's not showing title for some reason
-        context = super(SaveMusicaForm, self).get_context_data(**kwargs)
-        context['pagetitle'] = 'Cadastro de Musica'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['pagetitle'] = 'Cadastro de Música'
         return context
