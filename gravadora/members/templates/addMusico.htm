@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 container disco-container">
+        <div class="text-center">
+            <h1 class="display-4" style="display: inline-block; margin-right: 100px; white-space: nowrap;">{{ pagetitle }}</h1>
+            <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.nome.id_for_label }}">Nome:</label>
+                {{ form.nome }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.endereco.id_for_label }}">Endereço:</label>
+                {{ form.endereco }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.telefone.id_for_label }}">Telefone:</label>
+                {{ form.telefone }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.esta.id_for_label }}">Banda:</label>
+                {{ form.esta }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.toca.id_for_label }}">Instrumento:</label>
+                {{ form.toca }}
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}

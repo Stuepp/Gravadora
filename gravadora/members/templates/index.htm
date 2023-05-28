@@ -1,92 +1,134 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Menu Inicial</title>
-        <style>
-            html{
-                height: auto;
-            }
-            body{
-                background-image: linear-gradient(180deg, aqua, blue, #00008B);
-                background-image: linear-gradient(180deg, #F78D35, orange , #CC5500);
-                height: 100%;
-                margin: 0;
-                background-repeat: no-repeat;
-                background-attachment: fixed;
-                color: white;
-            }
-            .grid-container{
-                display: grid;
-                grid-template-columns: repeat(3, 1fr);
-                height: 100vh;
-                margin-right: 10px;
-            }
-            .grid-item-1{
-                display: block;
-                grid-column-start: 1;
-                grid-column-end: 2;
-                background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
-                padding-left: 30px;
-                padding-right: 30px;
-            }
-            .grid-item-2{
-                grid-column-start: 2;
-                grid-column-end: 3;
-            }
-            .grid-item-3{
-                grid-column-start: 3;
-                grid-column-end: 3;
-            }
-            .disco_atual{
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-                text-align: center;
-            }
-            input{
-                border: none;
-                border-radius: 30px;
-                margin-top: 10px;
-                text-align: left;
-                text-decoration-color: black;
-                padding-left: 15px;
-                height: 30px;
-                width: 220px;
-            }
-        </style>
-    </head>
-    <body> <!--background of body must change based on the image on the album-->
-        <div class="grid-container">
-            <div class="grid-item-1">
-                <input type="text" placeholder=" Search..."> <!--adcionar autocomplete e pegar lista de elementos cadastrados no bd, tentar adicionar icone de search tb-->
-                <!--nome do album-->
-                <h1>{{disco.titulo}}</h1>
-                <hr>
-                <h3>Músicas seguintes</h3> <!--não mostrar a música atual-->
-                {% for x in musicas %}
-                <h3>{{x.titulo}} -{% for musico in x.participa_Musico.all %} {{musico.nome}} {% endfor %}</h3> <!--musica - autor -->
-                {% endfor %}
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <title>Menu Inicial</title>
+    <style>
+        html {
+            height: 100%;
+        }
+        
+        body {
+            background-image: linear-gradient(180deg, aqua, blue, #00008B);
+            background-image: linear-gradient(180deg, #F78D35, orange , #CC5500);
+            height: 100%;
+            margin: 0;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        
+        .grid-container {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            height: 100vh;
+            margin-right: 10px;
+        }
+        
+        .grid-item-1 {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: flex-start;
+            background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7));
+            padding: 30px;
+        }
+        
+        .grid-item-2 {
+            display: grid;
+            place-items: center;
+        }
+        
+        .disco_atual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        
+        input {
+            border: none;
+            border-radius: 30px;
+            margin-top: 10px;
+            text-align: left;
+            text-decoration-color: black;
+            padding-left: 15px;
+            height: 30px;
+            width: 220px;
+        }
+        
+        .cadastro-links {
+            display: flex;
+            flex-direction: column;
+            margin-top: 20px;
+        }
+        
+        .cadastro-link {
+            background-color: #f2f2f2;
+            color: #333;
+            padding: 10px 20px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            margin-bottom: 10px;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cadastro-link:hover {
+            background-color: #e6e6e6;
+        }
+        
+        .cadastro-container {
+            margin-bottom: 20px;
+        }
+        
+        .cadastro-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="grid-item-1">
+            <input type="text" placeholder="Search...">
+            <h1 style="white-space: nowrap;">{{ disco.titulo }}</h1>
+            <hr>
+            <h3>Músicas seguintes</h3>
+            {% for musica in musicas %}
+                <h3>{{ musica.titulo }} -{% for musico in musica.participa_Musico.all %} {{ musico.nome }} {% endfor %}</h3>
+            {% endfor %}
+        </div>
+        <div class="grid-item-2">
+            <div class="disco_atual">
+                <img src="{{ musica.image.url }}" alt="sample" style="width: 200px; height: 200px; border: solid 3px black;">
+                <h1>{{ musica.titulo }}</h1>
+                <audio controls>
+                    <source src="{{ musica.file.url }}" type="audio/ogg">
+                    <source src="{{ musica.file.url }}" type="audio/mpeg">
+                    <source src="{{ musica.file.url }}" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
             </div>
-            <div class="grid-item-2" style="display: grid; grid-auto-flow: row; align-content: center;">
-                <div class="disco_atual">
-                    <img src="{{musica.image.url}}" alt="sample" style="width: 200px; height: 200px; 
-                    border: solid 3px black;">
-                    <h1>{{musica.titulo}}</h1> <!--nome da música atual-->
-                    <audio controls>
-                        <source src="{{musica.file.url}}" type="audio/ogg">
-                        <source src="{{musica.file.url}}" type="audio/mpeg">
-                        <source src="{{musica.file.url}}" type="audio/mp3">
-                        Your browser does not support the audio element.
-                    </audio>
+        </div>
+        <div class="grid-item-3">
+            <div class="cadastro-container">
+                <h2 class="cadastro-title">Cadastros:</h2>
+                <div class="cadastro-links">
+                    <a href="{% url 'addMusico' %}" class="cadastro-link">Cadastro de Músico</a>
+                    <a href="{% url 'addMusica' %}" class="cadastro-link">Cadastro de Música</a>
+                    <a href="{% url 'addBanda' %}" class="cadastro-link">Cadastro de Banda</a>
+                    <a href="{% url 'addInstrumento' %}" class="cadastro-link">Cadastro de Instrumento</a>
+                    <a href="{% url 'addDisco' %}" class="cadastro-link">Cadastro de Disco</a>
+                    <a href="{% url 'addProdutor' %}" class="cadastro-link">Cadastro de Produtor</a>
                 </div>
             </div>
-            <div class="grid-item-3">
-
-            </div>
         </div>
-        <div class="footer">
-
-        </div>
-    </body>
+    </div>
+    <div class="footer">
+    </div>
+</body>
 </html>

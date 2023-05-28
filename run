@@ -1,0 +1,5 @@
+python manage.py makemigrations
+python manage.py migrate
+-- pois mudamos o sqllite ali
+python manage.py runserver
+-- roda o localhost

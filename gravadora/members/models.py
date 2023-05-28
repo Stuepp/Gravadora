@@ -47,3 +47,5 @@ class Musica(models.Model):
 	participa_Musico = models.ManyToManyField(Musico)
 	participa_Banda = models.ManyToManyField(Banda)
 	aparece = models.ManyToManyField(Disco)
+
+

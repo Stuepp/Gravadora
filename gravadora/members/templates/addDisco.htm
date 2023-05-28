@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<div class="row justify-content-center">
+    <div class="col-md-8 container disco-container">
+        <div class="text-center">
+            <h1 class="display-4">{{ pagetitle }}</h1>
+            <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+        </div>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="{{ form.titulo.id_for_label }}">Título:</label>
+                {{ form.titulo }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.formato.id_for_label }}">Formato:</label>
+                {{ form.formato }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.data.id_for_label }}">Data:</label>
+                {{ form.data }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.disco_musico.id_for_label }}">Músico:</label>
+                {{ form.disco_musico }}
+            </div>
+            <div class="form-group">
+                <label for="{{ form.disco_banda.id_for_label }}">Banda:</label>
+                {{ form.disco_banda }}
+            </div>
+            <button type="submit" class="btn btn-primary">Salvar</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
