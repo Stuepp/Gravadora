@@ -83,14 +83,23 @@
                 font-weight: bold;
                 margin-bottom: 10px;
             }
+            .link{
+                background-color: #f2f2f2;
+                color: #333;
+                padding: 5px 20px;
+                border: none;
+                text-decoration: none;
+                border-radius: 10px;
+                font-size: large;
+            }
         </style>
     </head>
     <body> <!--background of body must change based on the image on the album-->
         <div class="grid-container">
             <div class="grid-item-1">
                 <input type="text" placeholder=" Search..."> <!--adcionar autocomplete e pegar lista de elementos cadastrados no bd, tentar adicionar icone de search tb-->
-                <!--nome do album-->
-                <h1>{{disco.titulo}}</h1>
+                <a class="link" style="margin-left: 50px;" href="{% url 'menu' %}">menu</a>
+                <h1>{{disco.titulo}}</h1><!--nome do album-->
                 <hr>
                 <h3>Músicas seguintes</h3> <!--não mostrar a música atual-->
                 {% for musica in musicas %}
@@ -99,6 +108,10 @@
             </div>
             <div class="grid-item-2">
                 <div class="disco_atual">
+                    {% if musica_atual == null %}
+                    <h1>Esse disco não tem uma música</h1>
+                    {% endif %}
+                    {% if musica_atual != null %}
                     <img src="{{musica_atual.image.url}}" alt="sample" style="width: 200px; height: 200px; 
                     border: solid 3px black;">
                     <h1>{{musica_atual.titulo}}</h1> <!--nome da música atual-->
@@ -108,20 +121,11 @@
                         <source src="{{musica_atual.file.url}}" type="audio/mp3">
                         Your browser does not support the audio element.
                     </audio>
+                    {% endif %}
                 </div>
             </div>
             <div class="grid-item-3">
-                <div class="cadastro-container">
-                    <h2 class="cadastro-title">Cadastros:</h2>
-                    <div class="cadastro-links">
-                        <a href="{% url 'addMusico' %}" class="cadastro-link">Cadastro de Músico</a>
-                        <a href="{% url 'addMusica' %}" class="cadastro-link">Cadastro de Música</a>
-                        <a href="{% url 'addBanda' %}" class="cadastro-link">Cadastro de Banda</a>
-                        <a href="{% url 'addInstrumento' %}" class="cadastro-link">Cadastro de Instrumento</a>
-                        <a href="{% url 'addDisco' %}" class="cadastro-link">Cadastro de Disco</a>
-                        <a href="{% url 'addProdutor' %}" class="cadastro-link">Cadastro de Produtor</a>
-                    </div>
-                </div>
+                
             </div>
         </div>
         <div class="footer">

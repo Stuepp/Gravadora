@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container" style="max-width:700px">
+    <h1 class="display-4">Teste</h1>
+    <div class="cadastro-container">
+        <div class="cadastro-links">
+            <h2 class="cadastro-title">Discos:</h2>
+            <form action="teste/" method="post" id="discoForm" class="cadastro-links">
+                {% csrf_token %}
+                {% for disco in discos%}
+                <button type="submit" name="disco" value="{{disco.id}}" form="discoForm" class="cadastro-link" style="border: none;">{{disco.titulo}} {{disco.id}}</button>
+                {% endfor %}
+            </form>
+            <h2 class="cadastro-title">Cadastros:</h2>
+            <a href="{% url 'addMusico' %}" class="cadastro-link">Cadastro de Músico</a>
+            <a href="{% url 'addMusica' %}" class="cadastro-link">Cadastro de Música</a>
+            <a href="{% url 'addBanda' %}" class="cadastro-link">Cadastro de Banda</a>
+            <a href="{% url 'addInstrumento' %}" class="cadastro-link">Cadastro de Instrumento</a>
+            <a href="{% url 'addDisco' %}" class="cadastro-link">Cadastro de Disco</a>
+            <a href="{% url 'addProdutor' %}" class="cadastro-link">Cadastro de Produtor</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

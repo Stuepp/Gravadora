@@ -1,30 +1,59 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.template import loader
 from django.views import View
 from django.views.generic.edit import FormView
 from . import forms
 from .models import Musico, Musica, Disco
+from django.urls import reverse_lazy
 # Create your views here.
-
+"""
 class ShowPlayListView(View):
     template_name = 'index.htm'
     #if Musico.objects.all()
-    d = Disco.objects.all().get(id=1)
+    #d = Disco.objects.all().get(id=1)
     context = {
         'musico': Musico.objects.all().values(), #get(id=1), 
         'musica_atual' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
         'disco': d,
-        'musicas' : Musica.objects.all().filter(aparece__id=d.id).values()
+        'musicas' : Musica.objects.all().filter(aparece__id=d.id)
     }
     def get(self, request, *args, **kwargs):
         template = loader.get_template(self.template_name)
-        return HttpResponse(template.render(self.context, request))
+        d = Disco.objects.all().get(id=request.POST.get('disco', None))
+        context = {
+            'musico': Musico.objects.all().values(), #get(id=1), 
+            'musica_atual' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
+            'disco': d,
+            'musicas' : Musica.objects.all().filter(aparece__id=d.id)
+        }
+        return HttpResponse(template.render(context, request))
+"""
+def teste(request):
+    template = loader.get_template('index.htm')
+    d = Disco.objects.all().get(id=request.POST.get('disco', None))
+    context = {
+        'musico': Musico.objects.all().values(), #get(id=1), 
+        'musica_atual' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
+        'disco': d,
+        'musicas' : Musica.objects.all().filter(aparece__id=d.id)
+    }
+    return HttpResponse(template.render(context, request))
+
+class Menu(View):
+    template_name = 'menu.htm'
+    context = {
+        'discos': Disco.objects.all()
+    }
+    def get(self, request, *args, **kwargs):
+        template = loader.get_template(self.template_name)
+        return HttpResponse(template.render(self.context,request))
+
 
 class SaveMusicoForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddMusicoForm
-    success_url = '/success/'
+    success_url = reverse_lazy('rmenu')
 
     def form_valid(self, form):
         form.save()
@@ -38,7 +67,7 @@ class SaveMusicoForm(FormView):
 class SaveBandaForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddBandaForm
-    success_url = '/success/'
+    success_url = reverse_lazy('rmenu')
 
     def form_valid(self, form):
         form.save()
@@ -52,7 +81,7 @@ class SaveBandaForm(FormView):
 class SaveInstrumentoForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddInstrumentoForm
-    success_url = '/success/'
+    success_url = reverse_lazy('rmenu')
 
     def form_valid(self, form):
         form.save()
@@ -66,7 +95,7 @@ class SaveInstrumentoForm(FormView):
 class SaveDiscoForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddDiscoForm
-    success_url = '/success/'
+    success_url = reverse_lazy('rmenu')
 
     def form_valid(self, form):
         form.save()
@@ -80,7 +109,7 @@ class SaveDiscoForm(FormView):
 class SaveProdutorForm(FormView):
     template_name = 'add.htm'
     form_class = forms.addProdutorForm
-    success_url = '/success/'
+    success_url = reverse_lazy('rmenu')
 
     def form_valid(self, form):
         form.save()
@@ -94,7 +123,7 @@ class SaveProdutorForm(FormView):
 class SaveMusicaForm(FormView): # multiple select box is not showing as expected
     template_name = 'add.htm'
     form_class = forms.AddMusicaForm
-    success_url = '/success/'
+    success_url = reverse_lazy('rmenu')
 
     def form_valid(self, form):
         form.save()
