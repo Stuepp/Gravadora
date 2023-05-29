@@ -34,7 +34,7 @@ class Disco(models.Model):
 	data = models.DateField() # see better
 	disco_musico = models.ManyToManyField(Musico)
 	disco_banda = models.ManyToManyField(Banda)
-	#produz = models.ManyToOneRel(Produtor) # Check how ManyToOneRel works
+	#produzido = models.ForeignKey(Produtor, on_delete=models.SET_NULL, default='') # Check how ManyToOneRel works
 
 	def __str__(self):
 		return '%s' % (self.titulo)

@@ -10,11 +10,11 @@ from .models import Musico, Musica, Disco
 class ShowPlayListView(View):
     template_name = 'index.htm'
     #if Musico.objects.all()
-    d = Disco.objects.get(id=1)
-    musicas = Musica.objects.filter(aparece__id=d.id).values()
+    d = Disco.objects.all().get(id=1)
+    musicas = Musica.objects.all().filter(aparece__id=d.id).values()
     context = {
         'musico': Musico.objects.all().values(), #get(id=1), 
-        'musica' : Musica.objects.filter(aparece__id=d.id).first(), # música atual
+        'musica' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
         'disco': d,
         'musicas' : musicas # selecionar futuramente apenas musicas da playlist/disco
     }
