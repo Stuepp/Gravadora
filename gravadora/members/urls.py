@@ -1,13 +1,14 @@
 from django.urls import path
 from . import views
-from members.views import ShowPlayListView, SaveMusicoForm, SaveBandaForm, SaveInstrumentoForm, SaveDiscoForm, SaveProdutorForm, SaveMusicaForm
 
 urlpatterns = [
-    path('', ShowPlayListView.as_view(),name='index'),
-    path('addMusico/', SaveMusicoForm.as_view(), name='add'),
-    path('addMusica/', SaveMusicaForm.as_view(), name='add'),
-    path('addBanda/', SaveBandaForm.as_view(), name='add'),
-    path('addInstrumento/', SaveInstrumentoForm.as_view(), name='add'),
-    path('addDisco/', SaveDiscoForm.as_view(), name='add'),
-    path('addProdutor/', SaveProdutorForm.as_view(), name='add'),
+    path('menu/teste/', views.teste, name='teste'),
+    #path('', views.ShowPlayListView.as_view(),name='index'),
+    path('menu/', views.Menu.as_view(), name='menu'),
+    path('addMusico/', views.SaveMusicoForm.as_view(), name='addMusico'),
+    path('addMusica/', views.SaveMusicaForm.as_view(), name='addMusica'),
+    path('addBanda/', views.SaveBandaForm.as_view(), name='addBanda'),
+    path('addInstrumento/', views.SaveInstrumentoForm.as_view(), name='addInstrumento'),
+    path('addDisco/', views.SaveDiscoForm.as_view(), name='addDisco'),
+    path('addProdutor/', views.SaveProdutorForm.as_view(), name='addProdutor'),
 ]

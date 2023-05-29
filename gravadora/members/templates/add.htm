@@ -1,11 +1,13 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="container" style="max-width:700px">
-    <h1 class=display-4">{{pagetitle}}</h1> <!--change the 'song' part to whatever is being uploaded, Musico/Banda/Song/Instrumento...-->
+    <h1 class="display-4">{{pagetitle}}</h1>
     <form method="post" enctype="multipart/form-data">
          {% csrf_token %}
          {{ form.as_div }}
          <input type="submit">
     </form>
+    <br><br>
+    <a class="cadastro-link" href="{% url 'menu' %}">menu</a>
 </div>
 {% endblock %}
