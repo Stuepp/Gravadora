@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.template import loader
 from django.views import View
 from django.views.generic.edit import FormView
-from .forms import AddMusicaForm, AddMusicoForm, AddBandaForm, AddInstrumentoForm, AddDiscoForm, addProdutorForm
+from . import forms
 from .models import Musico, Musica, Disco
 # Create your views here.
 
@@ -11,12 +11,11 @@ class ShowPlayListView(View):
     template_name = 'index.htm'
     #if Musico.objects.all()
     d = Disco.objects.all().get(id=1)
-    musicas = Musica.objects.all().filter(aparece__id=d.id).values()
     context = {
         'musico': Musico.objects.all().values(), #get(id=1), 
-        'musica' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
+        'musica_atual' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
         'disco': d,
-        'musicas' : musicas # selecionar futuramente apenas musicas da playlist/disco
+        'musicas' : Musica.objects.all().filter(aparece__id=d.id).values()
     }
     def get(self, request, *args, **kwargs):
         template = loader.get_template(self.template_name)
@@ -24,7 +23,7 @@ class ShowPlayListView(View):
 
 class SaveMusicoForm(FormView):
     template_name = 'add.htm'
-    form_class = AddMusicoForm
+    form_class = forms.AddMusicoForm
     success_url = '/success/'
 
     def form_valid(self, form):
@@ -38,7 +37,7 @@ class SaveMusicoForm(FormView):
 
 class SaveBandaForm(FormView):
     template_name = 'add.htm'
-    form_class = AddBandaForm
+    form_class = forms.AddBandaForm
     success_url = '/success/'
 
     def form_valid(self, form):
@@ -52,7 +51,7 @@ class SaveBandaForm(FormView):
 
 class SaveInstrumentoForm(FormView):
     template_name = 'add.htm'
-    form_class = AddInstrumentoForm
+    form_class = forms.AddInstrumentoForm
     success_url = '/success/'
 
     def form_valid(self, form):
@@ -66,7 +65,7 @@ class SaveInstrumentoForm(FormView):
 
 class SaveDiscoForm(FormView):
     template_name = 'add.htm'
-    form_class = AddDiscoForm
+    form_class = forms.AddDiscoForm
     success_url = '/success/'
 
     def form_valid(self, form):
@@ -80,7 +79,7 @@ class SaveDiscoForm(FormView):
 
 class SaveProdutorForm(FormView):
     template_name = 'add.htm'
-    form_class = addProdutorForm
+    form_class = forms.addProdutorForm
     success_url = '/success/'
 
     def form_valid(self, form):
@@ -94,7 +93,7 @@ class SaveProdutorForm(FormView):
 
 class SaveMusicaForm(FormView): # multiple select box is not showing as expected
     template_name = 'add.htm'
-    form_class = AddMusicaForm
+    form_class = forms.AddMusicaForm
     success_url = '/success/'
 
     def form_valid(self, form):
