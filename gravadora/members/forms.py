@@ -22,6 +22,7 @@ class AddMusicaForm(forms.ModelForm): # tentar reduzir MusicaMusico e MusicaBand
             'file': forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}),
             'image': forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}),
         }
+    # fazer participa_Musico e participa_Banda se tornar um deles obrigátorio com trigger
     participa_Musico = CustomMusicaMusicoChoiceField(
         queryset=Musico.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -34,7 +35,8 @@ class AddMusicaForm(forms.ModelForm): # tentar reduzir MusicaMusico e MusicaBand
     )
     aparece = CustomMusicaDiscoChoiceField(
         queryset = Disco.objects.all(),
-        widget=forms.CheckboxSelectMultiple
+        widget=forms.CheckboxSelectMultiple,
+        required=True
     )
 
 class AddMusicoForm(forms.ModelForm):
@@ -86,7 +88,8 @@ class AddDiscoForm(forms.ModelForm):
             'formato': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
             'data': forms.DateTimeInput(attrs={'type': 'date', 'required': True}), # tyoe data?
         }
-    disco_musico = CustomMusicaMusicoChoiceField(  # tentar reduzir MusicaMusico e MusicaBanda para MusicaMusicoBanda
+    # fazer disco_musico e disco_banda se tornar pelo menos um deles obrigatório com trigger
+    disco_musico = CustomMusicaMusicoChoiceField(
         queryset=Musico.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False

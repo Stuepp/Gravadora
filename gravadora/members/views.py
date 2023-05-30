@@ -29,14 +29,26 @@ class ShowPlayListView(View):
         }
         return HttpResponse(template.render(context, request))
 """
-def teste(request):
+def disco(request, musica, disco):
     template = loader.get_template('index.htm')
-    d = Disco.objects.all().get(id=request.POST.get('disco', None))
+    d = Disco.objects.all().get(id=disco)#request.POST.get('disco', None))
+    atual = musica
+    anterior = atual - 1
+    proxima = atual + 1
+    if Musica.objects.all().filter(aparece__id=d.id):
+        musica_atual = Musica.objects.all().filter(aparece__id=d.id)[atual]
+    else:
+        musica_atual = Musica.objects.all().filter(aparece__id=d.id)
     context = {
         'musico': Musico.objects.all().values(), #get(id=1), 
-        'musica_atual' : Musica.objects.all().filter(aparece__id=d.id).first(), # música atual
+        'musica_atual' : musica_atual,
         'disco': d,
-        'musicas' : Musica.objects.all().filter(aparece__id=d.id)
+        'musicas' : Musica.objects.all().filter(aparece__id=d.id),
+        'anterior': atual - 1,
+        'atual': atual,
+        'proxima': proxima,
+        'anterior': anterior,
+        'ultimo': len(Musica.objects.all().filter(aparece__id=d.id))-1,
     }
     return HttpResponse(template.render(context, request))
 

@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Menu Inicial</title>
+        <title>{{disco.titulo}}</title>
         <style>
             html{
                 height: auto;
@@ -92,6 +92,22 @@
                 border-radius: 10px;
                 font-size: large;
             }
+            .bt{
+                background-color: #f2f2f2;
+                color: black;
+                display: block;
+                padding: 1px;
+                margin: 3px;
+                border: none;
+                border-radius: 10px;
+                width: 30px;
+                height: 30px;
+                text-decoration: none;
+                font-size: large;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+            }
         </style>
     </head>
     <body> <!--background of body must change based on the image on the album-->
@@ -108,19 +124,24 @@
             </div>
             <div class="grid-item-2">
                 <div class="disco_atual">
-                    {% if musica_atual == null %}
-                    <h1>Esse disco não tem uma música</h1>
+                    {% if musica_atual%}
+                        <img src="{{musica_atual.image.url}}" alt="sample" style="width: 200px; height: 200px; 
+                        border: solid 3px black;">
+                        <h1>{{musica_atual.titulo}}</h1> <!--nome da música atual-->
+                        <audio controls>
+                            <source src="{{musica_atual.file.url}}" type="audio/ogg">
+                            <source src="{{musica_atual.file.url}}" type="audio/mpeg">
+                            <source src="{{musica_atual.file.url}}" type="audio/mp3">
+                            Your browser does not support the audio element.
+                        </audio>
+                    {% else %}
+                        <h1>Esse disco não tem nenhuma música no momento</h1>
                     {% endif %}
-                    {% if musica_atual != null %}
-                    <img src="{{musica_atual.image.url}}" alt="sample" style="width: 200px; height: 200px; 
-                    border: solid 3px black;">
-                    <h1>{{musica_atual.titulo}}</h1> <!--nome da música atual-->
-                    <audio controls>
-                        <source src="{{musica_atual.file.url}}" type="audio/ogg">
-                        <source src="{{musica_atual.file.url}}" type="audio/mpeg">
-                        <source src="{{musica_atual.file.url}}" type="audio/mp3">
-                        Your browser does not support the audio element.
-                    </audio>
+                    {% if atual < ultimo and musica_atual %}
+                    <a href="{% url 'disco2' musica=proxima disco=disco.id%}" class="bt"> -> </a>
+                    {% endif %}
+                    {% if  atual > 0 and musica_atual %}
+                    <a href="{% url 'disco2' musica=anterior disco=disco.id%}" class="bt"> <- </a>
                     {% endif %}
                 </div>
             </div>
