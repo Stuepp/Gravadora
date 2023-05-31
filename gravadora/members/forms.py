@@ -11,14 +11,16 @@ class CustomMusicaBandaChoiceField(forms.ModelMultipleChoiceField):
 class CustomMusicaDiscoChoiceField(forms.ModelMultipleChoiceField):
     def label_from_instance(self, disco):
         return "%s" % disco.titulo
-
+class CustomdDiscoProdutorField(forms.ModelChoiceField):
+    def label_from_instance(self, produtor):
+        return "%s" % produtor.nome
 class AddMusicaForm(forms.ModelForm): # tentar reduzir MusicaMusico e MusicaBanda para MusicaMusicoBanda
     class Meta:
         model = Musica
         fields = ('titulo','autores','file','image','participa_Musico','participa_Banda', 'aparece')
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
-            'autores': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
+            'autores': forms.TextInput(attrs={'class': 'form-control', 'required': False}),
             'file': forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}),
             'image': forms.FileInput(attrs={'type': 'file', 'class': 'form-control'}),
         }
@@ -81,14 +83,14 @@ class AddInstrumentoForm(forms.ModelForm):
 class AddDiscoForm(forms.ModelForm):
     class Meta:
         model = Disco
-        fields = ('titulo','formato','data','disco_musico','disco_banda')
+        fields = ('titulo','formato','data','disco_musico','disco_banda','produzido')
 
         widgets = {
             'titulo': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
             'formato': forms.TextInput(attrs={'class': 'form-control', 'required': True}),
             'data': forms.DateTimeInput(attrs={'type': 'date', 'required': True}), # tyoe data?
         }
-    # fazer disco_musico e disco_banda se tornar pelo menos um deles obrigatório com trigger
+    # disco_musico and disco_banda one of them must not be null to be accept by the db
     disco_musico = CustomMusicaMusicoChoiceField(
         queryset=Musico.objects.all(),
         widget=forms.CheckboxSelectMultiple,
@@ -98,6 +100,11 @@ class AddDiscoForm(forms.ModelForm):
         queryset=Banda.objects.all(),
         widget=forms.CheckboxSelectMultiple,
         required=False
+    )
+    produzido = CustomdDiscoProdutorField(
+        queryset=Produtor.objects.all(),
+        widget=forms.CheckboxInput,
+        required=True,
     )
 
 class addProdutorForm(forms.ModelForm):

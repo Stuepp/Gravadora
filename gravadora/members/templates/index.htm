@@ -93,9 +93,9 @@
                 font-size: large;
             }
             .bt{
-                background-color: #f2f2f2;
+                /*background-color: #f2f2f2;*/
                 color: black;
-                display: block;
+                display: flex;
                 padding: 1px;
                 margin: 3px;
                 border: none;
@@ -107,6 +107,17 @@
                 margin-left: auto;
                 margin-right: auto;
                 text-align: center;
+                box-shadow: 3px 6px 18px 3px rgba(0, 0, 0, 0.56);
+                transition: 0.2s all;
+            }
+            .bt:hover{
+                background-color: #e6e6e6;
+            }
+            .bt:active {
+                transform: scale(0.98);
+                /* Scaling button to 0.98 to its original size */
+                box-shadow: 0px 1px 10px 1px rgba(0, 0, 0, 0.4);
+                /* Lowering the shadow */
             }
         </style>
     </head>
@@ -137,12 +148,18 @@
                     {% else %}
                         <h1>Esse disco não tem nenhuma música no momento</h1>
                     {% endif %}
-                    {% if atual < ultimo and musica_atual %}
-                    <a href="{% url 'disco2' musica=proxima disco=disco.id%}" class="bt"> -> </a>
-                    {% endif %}
-                    {% if  atual > 0 and musica_atual %}
-                    <a href="{% url 'disco2' musica=anterior disco=disco.id%}" class="bt"> <- </a>
-                    {% endif %}
+                    <div style="display: block; margin-left: auto; margin-right: auto;">
+                        {% if atual < ultimo and musica_atual %}
+                        <a href="{% url 'disco2' musica=proxima disco=disco.id%}" class="bt" style="box-shadow: -3px 6px 18px 3px rgba(0, 0, 0, 0.56); float: right;">
+                            <img src="{{ MEDIA_URL }}btn/R_bt.png" style="width: 30px; height: 30px;"/>
+                        </a>
+                        {% endif %}
+                        {% if  atual > 0 and musica_atual %}
+                        <a href="{% url 'disco2' musica=anterior disco=disco.id%}" class="bt" style="box-shadow: 3px 6px 18px 3px rgba(0, 0, 0, 0.56); float: left;">
+                            <img src="{{ MEDIA_URL }}btn/L_bt.png" style="width: 30px; height: 30px;"/>
+                        </a>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="grid-item-3">
@@ -150,7 +167,7 @@
             </div>
         </div>
         <div class="footer">
-
+            
         </div>
     </body>
 </html>

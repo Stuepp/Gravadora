@@ -65,7 +65,7 @@ class Menu(View):
 class SaveMusicoForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddMusicoForm
-    success_url = reverse_lazy('rmenu')
+    success_url = reverse_lazy('menu')
 
     def form_valid(self, form):
         form.save()
@@ -79,7 +79,7 @@ class SaveMusicoForm(FormView):
 class SaveBandaForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddBandaForm
-    success_url = reverse_lazy('rmenu')
+    success_url = reverse_lazy('menu')
 
     def form_valid(self, form):
         form.save()
@@ -93,7 +93,7 @@ class SaveBandaForm(FormView):
 class SaveInstrumentoForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddInstrumentoForm
-    success_url = reverse_lazy('rmenu')
+    success_url = reverse_lazy('menu')
 
     def form_valid(self, form):
         form.save()
@@ -107,7 +107,7 @@ class SaveInstrumentoForm(FormView):
 class SaveDiscoForm(FormView):
     template_name = 'add.htm'
     form_class = forms.AddDiscoForm
-    success_url = reverse_lazy('rmenu')
+    success_url = reverse_lazy('menu')
 
     def form_valid(self, form):
         form.save()
@@ -121,7 +121,7 @@ class SaveDiscoForm(FormView):
 class SaveProdutorForm(FormView):
     template_name = 'add.htm'
     form_class = forms.addProdutorForm
-    success_url = reverse_lazy('rmenu')
+    success_url = reverse_lazy('menu')
 
     def form_valid(self, form):
         form.save()
@@ -135,7 +135,7 @@ class SaveProdutorForm(FormView):
 class SaveMusicaForm(FormView): # multiple select box is not showing as expected
     template_name = 'add.htm'
     form_class = forms.AddMusicaForm
-    success_url = reverse_lazy('rmenu')
+    success_url = reverse_lazy('menu')
 
     def form_valid(self, form):
         form.save()
