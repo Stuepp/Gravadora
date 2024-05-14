@@ -1,4 +1,5 @@
 # Gravadora
+## PT-BR
 A companhia discográfica decidiu criar uma base de dados com informação sobre os seus músicos bem como outra informação da companhia. As informações dadas ao projetista foram as seguintes:
 - Cada músico tem um nro. de registro, um nome, um endereço e um número de telefone. Os músicos em início de carreira muitas vezes partilham um endereço e, além disso, assume-se que cada endereço só tem um telefone.
 - Cada músico pode pertencer a uma ou mais bandas.
@@ -9,3 +10,26 @@ A companhia discográfica decidiu criar uma base de dados com informação sobre
 - Cada disco pertence a um músico ou a uma banca e tem um certo número de músicas, mas cada música pode aparecer em um ou mais discos.
 - Cada música pode ter a participação de vários músicos ou bandas, e cada músico ou banca pode participar em várias músicas.
 - Cada disco tem um produtor. Os produtores podem produzir vários discos.
+### O que aprendi?
+
+## EN
+- Each artist has an id, name, address and a cell phone number. The musician at the beginning of their career they often share an address and, furthermore, it is assumed that each address only has one telephone number.
+- Each musician can belong to one or more bands.
+- Each instrument used in the studios has a name (e.g. guitar, drums, etc.) and an internal code.
+- Each disc recorded at the company has a title, a date, a format (e.g. CD, MC, K7), and a disc identifier.
+- Each song recorded by the company has a title and authors.,
+- Each musician can play multiple instruments, and each instrument can be played by multiple musicians.,
+- Each record belongs to a musician or a band and has a certain number of songs, but each song can appear on one or more records.,
+- Each song can feature several musicians or bands, and each musician or panel can participate in several songs.,
+- Each record has a producer. Producers can produce multiple records.
+### What did I learn?
+In this project I learned the frameworj Django, how to use it for the Front-End and how to connect it with a DB like postgress and MongoDB, using the framework I tried to make ma pages and components more abstract, making the form of the html the same but the content inside different.
+
+### What was the most difficult?
+I believe the most difficult part that I passed was passing information between pages, "How can I inform the user is going for item X", "How can I pass this ID for that page?", "How can I pass this object for that page?"
+
+### How would I improve the project?
+I would search for part were I can make them abstract, show in the Front-End more of the DB that was made, for example the connections of each musician and bands to each instruments, who shared numbers and address and who not. Would ask for more help for the UX too.
+
+### What do I want to learn next?
+As I started looking for jobs I noticed a demand for React, Angular, Typescript, MongoDB. So I aim to learn them, but I also aim to improve my coding skills, and if there is a way to code faster and with quality I would like to learn how too. So basically I aim to learn what is asked in the market but also to improve my base.
